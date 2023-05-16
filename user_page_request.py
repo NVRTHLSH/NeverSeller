@@ -13,12 +13,13 @@ def lzt_api_get_user_name(access_token):
             "https://api.lzt.market/me"
         )
     except requests.exceptions.RequestException:
-        return ["WRONG TOKEN / ERROR", "WRONG TOKEN / ERROR", "WRONG TOKEN / ERROR", "ERROR"]
+        return ["WRONG TOKEN / ERROR", "WRONG TOKEN / ERROR", "WRONG TOKEN / ERROR"]
+    print(response.text)
     try:
         res = response.json().get("user")
     except requests.exceptions.JSONDecodeError:
-        return ["WRONG TOKEN / ERROR", "WRONG TOKEN / ERROR", "WRONG TOKEN / ERROR", response.text]
+        return ["WRONG TOKEN / ERROR", "WRONG TOKEN / ERROR", "WRONG TOKEN / ERROR"]
     if res is None or response.json().get("error") is not None:
-        return ["WRONG TOKEN / ERROR", "WRONG TOKEN / ERROR", "WRONG TOKEN / ERROR", response.text]
+        return ["WRONG TOKEN / ERROR", "WRONG TOKEN / ERROR", "WRONG TOKEN / ERROR"]
     else:
-        return [res.get("username"), res.get("short_link"), res.get("balance"), response.text]
+        return [res.get("username"), res.get("short_link"), res.get("balance")]
